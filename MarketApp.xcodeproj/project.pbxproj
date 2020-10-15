@@ -122,11 +122,26 @@
 			path = Constant;
 			sourceTree = "<group>";
 		};
+		1A28F1E02538C8BB003D64A4 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				1A7E787225378F7E000689D8 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		1A28F1E12538C8CD003D64A4 /* Plist */ = {
+			isa = PBXGroup;
+			children = (
+				1A7E787525378F7E000689D8 /* Info.plist */,
+			);
+			path = Plist;
+			sourceTree = "<group>";
+		};
 		1A5E92D82537998F007B00DA /* View */ = {
 			isa = PBXGroup;
 			children = (
 				1A5E92DA253799BE007B00DA /* MainView.swift */,
-				1A5E92EE25379B41007B00DA /* Cell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -285,11 +300,11 @@
 		1A7E78A5253793DA000689D8 /* Supporting File */ = {
 			isa = PBXGroup;
 			children = (
+				1A28F1E12538C8CD003D64A4 /* Plist */,
+				1A28F1E02538C8BB003D64A4 /* Storyboard */,
 				1A28F1CA2538B3E8003D64A4 /* Constant */,
 				1A5E92E025379A45007B00DA /* Extensions */,
 				1A5E92DF25379A3B007B00DA /* Protocol */,
-				1A7E787225378F7E000689D8 /* LaunchScreen.storyboard */,
-				1A7E787525378F7E000689D8 /* Info.plist */,
 			);
 			path = "Supporting File";
 			sourceTree = "<group>";
@@ -305,6 +320,7 @@
 		1A7E78AD25379587000689D8 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				1A5E92EE25379B41007B00DA /* Cell */,
 				1A5E92D82537998F007B00DA /* View */,
 				1A28F1D32538B53D003D64A4 /* MainViewModel.swift */,
 				1A7E78AE25379595000689D8 /* MainViewController.swift */,
@@ -634,7 +650,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 88MUA8FE52;
-				INFOPLIST_FILE = "MarketApp/Supporting File/Info.plist";
+				INFOPLIST_FILE = "MarketApp/Supporting File/Plist/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -653,7 +669,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 88MUA8FE52;
-				INFOPLIST_FILE = "MarketApp/Supporting File/Info.plist";
+				INFOPLIST_FILE = "MarketApp/Supporting File/Plist/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

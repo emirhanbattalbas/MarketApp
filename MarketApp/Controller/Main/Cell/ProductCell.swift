@@ -1,5 +1,9 @@
 import UIKit
 
+protocol ProductCellDelegate: AnyObject {
+  func didProductChangePress(isIncrease: Bool)
+}
+
 class ProductCell: UICollectionViewCell, Reusable {
   
   static var nib: UINib {
@@ -21,7 +25,7 @@ class ProductCell: UICollectionViewCell, Reusable {
   @IBOutlet var productNameLabel: UILabel!
   
   var productCount: Int = 0
-  
+  weak var delegate: ProductCellDelegate?
   var product: Product? {
     didSet {
       guard let product = product else { return }
@@ -42,13 +46,13 @@ class ProductCell: UICollectionViewCell, Reusable {
   @IBAction func deIncreaseTapped(_ sender: Any) {
 
     productCount -= 1
+    delegate?.didProductChangePress(isIncrease: false)
     guard productCount != 0 else {
       productCountView.isHidden = true
       deIncreaseButton.isHidden = true
       return
     }
     productCountLabel.text = String(productCount)
-
   }
   
   @IBAction func increaseTapped(_ sender: Any) {
@@ -58,6 +62,6 @@ class ProductCell: UICollectionViewCell, Reusable {
     productCountLabel.text = String(productCount)
     productCountView.isHidden = false
     deIncreaseButton.isHidden = false
-    
+    delegate?.didProductChangePress(isIncrease: true)
   }
 }
