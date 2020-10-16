@@ -6,6 +6,7 @@ class MainViewController: UIViewController {
   
   var viewModel: MainViewModel!
   var totalProductCount: Int = 0
+  var selectedProductDictionary: [String:[Product]] = [:]
   
   lazy private var cartButton : UIButton = {
     let button = UIButton(type: .system)
@@ -18,7 +19,7 @@ class MainViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     viewModel = MainViewModel(view: mainView)
-    mainView.customizeCollectionView()
+    mainView.registerCell()
     customizeNavigation()
   }
 }
@@ -53,16 +54,23 @@ extension MainViewController {
   }
   
   @objc func didShowMarket() {
-    
+    let cardViewController = CardViewController()
+    let nav = UINavigationController(rootViewController: cardViewController)
+    nav.modalPresentationStyle = .fullScreen
+    present(nav, animated: true, completion: nil)
   }
 }
 
 extension MainViewController: ProductCellDelegate {
-  func didProductChangePress(isIncrease: Bool) {
+  func didProductChangePress(isIncrease: Bool, product: Product) {
     
     if isIncrease {
+      var selectProduct = selectedProductDictionary[product.id] ?? []
+      selectProduct.append(product)
+      selectedProductDictionary[product.id] = selectProduct
       totalProductCount += 1
     } else {
+      selectedProductDictionary.removeValue(forKey: product.id)
       totalProductCount -= 1
     }
     

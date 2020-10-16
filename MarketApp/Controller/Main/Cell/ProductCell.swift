@@ -1,7 +1,7 @@
 import UIKit
 
 protocol ProductCellDelegate: AnyObject {
-  func didProductChangePress(isIncrease: Bool)
+  func didProductChangePress(isIncrease: Bool, product: Product)
 }
 
 class ProductCell: UICollectionViewCell, Reusable {
@@ -45,8 +45,10 @@ class ProductCell: UICollectionViewCell, Reusable {
   
   @IBAction func deIncreaseTapped(_ sender: Any) {
 
+    guard let product = product else { return }
     productCount -= 1
-    delegate?.didProductChangePress(isIncrease: false)
+    delegate?.didProductChangePress(isIncrease: false, product: product)
+    
     guard productCount != 0 else {
       productCountView.isHidden = true
       deIncreaseButton.isHidden = true
@@ -62,6 +64,6 @@ class ProductCell: UICollectionViewCell, Reusable {
     productCountLabel.text = String(productCount)
     productCountView.isHidden = false
     deIncreaseButton.isHidden = false
-    delegate?.didProductChangePress(isIncrease: true)
+    delegate?.didProductChangePress(isIncrease: true, product: product)
   }
 }
