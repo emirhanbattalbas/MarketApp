@@ -1,15 +1,22 @@
 import UIKit
 
+protocol CardViewControllerDelegate: AnyObject {
+  func didDeleteCard()
+  func didUpdateCard(product: Product)
+}
+
 class CardViewController: UIViewController {
   
   @IBOutlet var cardView: CardView!
     
+  var cardViewModel: CardViewModel!
+  weak var delegate: CardViewControllerDelegate?
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     cardView.registerCell()
     customizeNavigation()
   }
-  
 }
 
 extension CardViewController {
@@ -26,11 +33,16 @@ extension CardViewController {
   
   @objc func didDeleteCard() {
     dismiss(animated: true, completion: {
+      self.delegate?.didDeleteCard()
     })
   }
   
   @objc func didCloseCard() {
-    dismiss(animated: true, completion: nil)
+    dismiss(animated: true, completion: {
+      if let editingProduct = self.cardViewModel.getEditingProduct() {
+        self.delegate?.didUpdateCard(product: editingProduct)
+      }
+    })
   }
 }
 
@@ -38,11 +50,33 @@ extension CardViewController {
 extension CardViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 4
+    return cardViewModel.getProductCount()
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell: CardInProductCell = tableView.dequeueReusableCell(for: indexPath)
+    cell.product = cardViewModel.getProduct(row: indexPath.row)
+    cell.delegate = self
     return cell
+  }
+}
+
+extension CardViewController: CardInProductCellDelegate {
+  
+  func didUpdateProduct(product: Product) {
+    cardViewModel.setEditingProdut(product: product)
+  }
+  
+  func didRemoveProduct(sender: UITableViewCell) {
+    
+    guard let indexPath = cardView.tableView.indexPath(for: sender) else { return }
+    let id = cardViewModel.getProduct(row: indexPath.row).id
+    cardViewModel.deleteProduct(index: indexPath.row)
+    cardView.tableView.deleteRows(at: [indexPath], with: .automatic)
+    delegate?.didDeleteCard()
+    
+    if cardViewModel.isCardEmpty() {
+      dismiss(animated: true, completion: nil)
+    }
   }
 }

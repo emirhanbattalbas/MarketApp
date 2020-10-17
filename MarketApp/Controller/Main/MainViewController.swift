@@ -5,8 +5,6 @@ class MainViewController: UIViewController {
   @IBOutlet var mainView: MainView!
   
   var viewModel: MainViewModel!
-  var totalProductCount: Int = 0
-  var selectedProductDictionary: [String:[Product]] = [:]
   
   lazy private var cartButton : UIButton = {
     let button = UIButton(type: .system)
@@ -21,6 +19,12 @@ class MainViewController: UIViewController {
     viewModel = MainViewModel(view: mainView)
     mainView.registerCell()
     customizeNavigation()
+  }
+  
+  fileprivate func setRightBarButton(totalProductCount: Int) {
+    let buttonTitle = totalProductCount <= 0 ? "" : String(totalProductCount)
+    cartButton.setTitle(buttonTitle, for: .normal)
+    navigationItem.rightBarButtonItem = UIBarButtonItem(customView: cartButton)
   }
 }
 
@@ -55,6 +59,8 @@ extension MainViewController {
   
   @objc func didShowMarket() {
     let cardViewController = CardViewController()
+    cardViewController.cardViewModel = CardViewModel(selectedProducts: viewModel.getProductList())
+    cardViewController.delegate = self
     let nav = UINavigationController(rootViewController: cardViewController)
     nav.modalPresentationStyle = .fullScreen
     present(nav, animated: true, completion: nil)
@@ -62,21 +68,29 @@ extension MainViewController {
 }
 
 extension MainViewController: ProductCellDelegate {
-  func didProductChangePress(isIncrease: Bool, product: Product) {
-    
-    if isIncrease {
-      var selectProduct = selectedProductDictionary[product.id] ?? []
-      selectProduct.append(product)
-      selectedProductDictionary[product.id] = selectProduct
-      totalProductCount += 1
-    } else {
-      selectedProductDictionary.removeValue(forKey: product.id)
-      totalProductCount -= 1
-    }
-    
-    let buttonTitle = totalProductCount == 0 ? "" : String(totalProductCount)
-    
-    cartButton.setTitle(buttonTitle, for: .normal)
-    navigationItem.rightBarButtonItem = UIBarButtonItem(customView: cartButton)
+  
+  func didProductIncrease(product: Product) {
+    viewModel.editProduct(newProduct: product)
+    setRightBarButton(totalProductCount: viewModel.cardBadgeCount())
+  }
+  
+  func didProductDeIncrease(product: Product) {
+    viewModel.editProduct(newProduct: product)
+    setRightBarButton(totalProductCount: viewModel.cardBadgeCount())
+  }
+}
+
+extension MainViewController: CardViewControllerDelegate {
+  
+  func didUpdateCard(product: Product) {
+    viewModel.editProduct(newProduct: product)
+    mainView.collectionView.reloadData()
+    setRightBarButton(totalProductCount: viewModel.cardBadgeCount())
+  }
+  
+  func didDeleteCard() {
+    viewModel.removeAllSelectedProduct()
+    mainView.collectionView.reloadData()
+    setRightBarButton(totalProductCount: viewModel.cardBadgeCount())
   }
 }

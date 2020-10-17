@@ -1,7 +1,8 @@
 import UIKit
 
 protocol ProductCellDelegate: AnyObject {
-  func didProductChangePress(isIncrease: Bool, product: Product)
+  func didProductIncrease(product: Product)
+  func didProductDeIncrease(product: Product)
 }
 
 class ProductCell: UICollectionViewCell, Reusable {
@@ -36,6 +37,16 @@ class ProductCell: UICollectionViewCell, Reusable {
       }
       productPriceLabel.text = product.amount
       productNameLabel.text = product.name
+      if product.selectedCount == nil {
+        deIncreaseButton.isHidden = true
+        productCountView.isHidden = true
+      } else {
+        if let selectedCount = product.selectedCount {
+          productCountLabel.text = String(selectedCount)
+          deIncreaseButton.isHidden = false
+          productCountView.isHidden = false
+        }
+      }
     }
   }
   
@@ -47,7 +58,8 @@ class ProductCell: UICollectionViewCell, Reusable {
 
     guard let product = product else { return }
     productCount -= 1
-    delegate?.didProductChangePress(isIncrease: false, product: product)
+    product.selectedCount = productCount
+    delegate?.didProductDeIncrease(product: product)
     
     guard productCount != 0 else {
       productCountView.isHidden = true
@@ -61,9 +73,10 @@ class ProductCell: UICollectionViewCell, Reusable {
     
     guard let product = product, product.stock > productCount else { return }
     productCount += 1
+    product.selectedCount = productCount
     productCountLabel.text = String(productCount)
     productCountView.isHidden = false
     deIncreaseButton.isHidden = false
-    delegate?.didProductChangePress(isIncrease: true, product: product)
+    delegate?.didProductIncrease(product: product)
   }
 }

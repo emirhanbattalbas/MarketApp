@@ -10,4 +10,5 @@ class Product: Codable {
   var currency: String?
   var imageUrl: String?
   var stock: Int = 0
+  var selectedCount: Int?
 }

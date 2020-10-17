@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A22B351253A3C65005566A7 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A22B350253A3C65005566A7 /* CardViewModel.swift */; };
 		1A28F1C62538B3B4003D64A4 /* ProductResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A28F1C52538B3B4003D64A4 /* ProductResponse.swift */; };
 		1A28F1CC2538B3FB003D64A4 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A28F1CB2538B3FB003D64A4 /* Constant.swift */; };
 		1A28F1D42538B53D003D64A4 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A28F1D32538B53D003D64A4 /* MainViewModel.swift */; };
@@ -60,6 +61,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A22B350253A3C65005566A7 /* CardViewModel.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		1A28F1C52538B3B4003D64A4 /* ProductResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductResponse.swift; sourceTree = "<group>"; };
 		1A28F1CB2538B3FB003D64A4 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		1A28F1D32538B53D003D64A4 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 			children = (
 				1AC00BC22538D68600F69B94 /* Cell */,
 				1AC00BBE2538D68000F69B94 /* View */,
+				1A22B350253A3C65005566A7 /* CardViewModel.swift */,
 				1AC00BB42538D34500F69B94 /* CardViewController.swift */,
 				1AC00BB52538D34500F69B94 /* CardViewController.xib */,
 			);
@@ -516,6 +519,7 @@
 				1AC00BB62538D34500F69B94 /* CardViewController.swift in Sources */,
 				1A28F1CC2538B3FB003D64A4 /* Constant.swift in Sources */,
 				1A28F1DC2538BF3A003D64A4 /* UIImageView+Extension.swift in Sources */,
+				1A22B351253A3C65005566A7 /* CardViewModel.swift in Sources */,
 				1A5E932E2538B2BC007B00DA /* URLComponents+API.swift in Sources */,
 				1A5E92EA25379A85007B00DA /* UICollectionView+Extension.swift in Sources */,
 				1A5E93342538B2BC007B00DA /* HTTPMethod.swift in Sources */,
