@@ -25,7 +25,8 @@ class ProductCell: UICollectionViewCell, Reusable {
   @IBOutlet var productPriceLabel: UILabel!
   @IBOutlet var productNameLabel: UILabel!
   
-  var productCount: Int = 0
+  private(set) var productCount: Int = 0
+  
   weak var delegate: ProductCellDelegate?
   var product: Product? {
     didSet {
@@ -37,15 +38,14 @@ class ProductCell: UICollectionViewCell, Reusable {
       }
       productPriceLabel.text = product.amount
       productNameLabel.text = product.name
-      if product.selectedCount == nil {
+      
+      if let selectedCount = product.selectedCount {
+        productCountLabel.text = String(selectedCount)
+        deIncreaseButton.isHidden = false
+        productCountView.isHidden = false
+      } else {
         deIncreaseButton.isHidden = true
         productCountView.isHidden = true
-      } else {
-        if let selectedCount = product.selectedCount {
-          productCountLabel.text = String(selectedCount)
-          deIncreaseButton.isHidden = false
-          productCountView.isHidden = false
-        }
       }
     }
   }

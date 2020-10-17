@@ -16,6 +16,10 @@ class CardViewController: UIViewController {
     super.viewDidLoad()
     cardView.registerCell()
     customizeNavigation()
+    cardView.setTotalPrice(totalPrice: cardViewModel.getTotalPrice())
+  }
+  @IBAction func paymentTapped(_ sender: Any) {
+    cardViewModel.payment()
   }
 }
 
@@ -32,9 +36,13 @@ extension CardViewController {
   }
   
   @objc func didDeleteCard() {
-    dismiss(animated: true, completion: {
-      self.delegate?.didDeleteCard()
-    })
+    createDefaultAlert(title: "Warning",
+                       message: "Sepetinizdeki ürünleri silmek istediğinize eminmisiniz ?",
+                       okCallBack: {
+                        self.dismiss(animated: true, completion: {
+                          self.delegate?.didDeleteCard()
+                        })
+                       }, cancelCallBack: {})
   }
   
   @objc func didCloseCard() {
@@ -59,23 +67,24 @@ extension CardViewController: UITableViewDelegate, UITableViewDataSource {
     cell.delegate = self
     return cell
   }
+
 }
 
 extension CardViewController: CardInProductCellDelegate {
   
   func didUpdateProduct(product: Product) {
     cardViewModel.setEditingProdut(product: product)
+    cardView.setTotalPrice(totalPrice: cardViewModel.getTotalPrice())
   }
   
   func didRemoveProduct(sender: UITableViewCell) {
     
     guard let indexPath = cardView.tableView.indexPath(for: sender) else { return }
-    let id = cardViewModel.getProduct(row: indexPath.row).id
     cardViewModel.deleteProduct(index: indexPath.row)
-    cardView.tableView.deleteRows(at: [indexPath], with: .automatic)
-    delegate?.didDeleteCard()
+    cardView.tableView.deleteRows(at: [indexPath], with: .top)
     
     if cardViewModel.isCardEmpty() {
+      delegate?.didDeleteCard()
       dismiss(animated: true, completion: nil)
     }
   }

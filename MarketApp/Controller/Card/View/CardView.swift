@@ -9,4 +9,7 @@ class CardView: UIView {
     tableView.register(cellType: CardInProductCell.self)
   }
   
+  func setTotalPrice(totalPrice: String) {
+    cardTotalPriceLabel.text = totalPrice
+  }
 }

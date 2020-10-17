@@ -3,6 +3,7 @@ import Foundation
 enum APIRouter {
   
   case product
+  case payment(body: Payment)
 }
 
 extension APIRouter: Routable {
@@ -15,19 +16,26 @@ extension APIRouter: Routable {
     switch self {
     case .product:
       return "/list"
+    case .payment:
+      return "/checkout"
     }
   }
-  
+
   var method: HTTPMethod {
-    return .get
+    switch self {
+    case .product:
+      return .get
+    case .payment:
+      return .post
+    }
   }
   
   var task: Task? {
     switch self {
     case .product:
       return nil
-    default:
-      return nil
+    case let .payment(payment):
+      return .parameters(payment.dictionary!)
     }
   }
   
@@ -36,7 +44,11 @@ extension APIRouter: Routable {
   }
   
   var parametersEncoding: ParametersEncoding {
-    return .url
+    switch self {
+    case .product:
+      return .url
+    case .payment:
+      return .json
+    }
   }
-  
 }

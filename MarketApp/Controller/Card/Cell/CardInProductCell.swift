@@ -29,7 +29,7 @@ class CardInProductCell: UITableViewCell, Reusable {
          let url = URL(string: urlString) {
         productImageView.load(url: url)
       }
-      productPriceLabel.text = product.amount
+      productPriceLabel.text = String((product.price)*Double(product.selectedCount ?? 1))
       productCountLabel.text = String(product.selectedCount ?? 0)
       productNameLabel.text = product.name
     }
@@ -46,19 +46,26 @@ class CardInProductCell: UITableViewCell, Reusable {
   @IBAction func decreaseTapped(_ sender: Any) {
     
     product?.selectedCount! -= 1
-    productCountLabel.text = String(product!.selectedCount ?? 0)
-    
-    guard product?.selectedCount != 0 else {
+    setLabels(product: product)
+    if product?.selectedCount == 0 {
+      product?.selectedCount = nil
+    }
+    guard product?.selectedCount != nil else {
       delegate?.didRemoveProduct(sender: self)
       return
     }
-    delegate?.didUpdateProduct(product: product!)
   }
   
   @IBAction func increaseTapped(_ sender: Any) {
     guard product!.stock >= (product?.selectedCount ?? 0) else { return }
     product?.selectedCount! += 1
-    productCountLabel.text = String(product!.selectedCount ?? 0)
-    delegate?.didUpdateProduct(product: product!)
+    setLabels(product: product)
+  }
+  
+  private func setLabels(product: Product?) {
+    guard let product = product else { return }
+    productPriceLabel.text = String((product.price)*Double(product.selectedCount ?? 1))
+    productCountLabel.text = String(product.selectedCount ?? 0)
+    delegate?.didUpdateProduct(product: product)
   }
 }

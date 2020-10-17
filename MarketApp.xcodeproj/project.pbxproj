@@ -35,6 +35,9 @@
 		1A7E788A25378F7E000689D8 /* MarketAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7E788925378F7E000689D8 /* MarketAppUITests.swift */; };
 		1A7E78B025379595000689D8 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7E78AE25379595000689D8 /* MainViewController.swift */; };
 		1A7E78B125379595000689D8 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A7E78AF25379595000689D8 /* MainViewController.xib */; };
+		1A9D60DE253B589E001C4287 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9D60DD253B589E001C4287 /* UIViewController+Extension.swift */; };
+		1A9D60E3253B5E81001C4287 /* PaymentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9D60E2253B5E81001C4287 /* PaymentRequest.swift */; };
+		1A9D60E8253B7185001C4287 /* PaymentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9D60E7253B7185001C4287 /* PaymentResponse.swift */; };
 		1AC00BB62538D34500F69B94 /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC00BB42538D34500F69B94 /* CardViewController.swift */; };
 		1AC00BB72538D34500F69B94 /* CardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AC00BB52538D34500F69B94 /* CardViewController.xib */; };
 		1AC00BC52538D6E000F69B94 /* CardInProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC00BC32538D6E000F69B94 /* CardInProductCell.swift */; };
@@ -95,6 +98,9 @@
 		1A7E788B25378F7E000689D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A7E78AE25379595000689D8 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		1A7E78AF25379595000689D8 /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		1A9D60DD253B589E001C4287 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		1A9D60E2253B5E81001C4287 /* PaymentRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRequest.swift; sourceTree = "<group>"; };
+		1A9D60E7253B7185001C4287 /* PaymentResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentResponse.swift; sourceTree = "<group>"; };
 		1AC00BB42538D34500F69B94 /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
 		1AC00BB52538D34500F69B94 /* CardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardViewController.xib; sourceTree = "<group>"; };
 		1AC00BC32538D6E000F69B94 /* CardInProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInProductCell.swift; sourceTree = "<group>"; };
@@ -174,6 +180,7 @@
 				1A5E92E925379A85007B00DA /* UICollectionView+Extension.swift */,
 				1A28F1DB2538BF3A003D64A4 /* UIImageView+Extension.swift */,
 				1AC00BD22538D91B00F69B94 /* UITableView+Extension.swift */,
+				1A9D60DD253B589E001C4287 /* UIViewController+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -204,6 +211,8 @@
 			isa = PBXGroup;
 			children = (
 				1A28F1C52538B3B4003D64A4 /* ProductResponse.swift */,
+				1A9D60E2253B5E81001C4287 /* PaymentRequest.swift */,
+				1A9D60E7253B7185001C4287 /* PaymentResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -507,6 +516,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A9D60DE253B589E001C4287 /* UIViewController+Extension.swift in Sources */,
 				1AC00BC52538D6E000F69B94 /* CardInProductCell.swift in Sources */,
 				1A5E93302538B2BC007B00DA /* API.swift in Sources */,
 				1A5E93312538B2BC007B00DA /* APIRouter.swift in Sources */,
@@ -523,7 +533,9 @@
 				1A5E932E2538B2BC007B00DA /* URLComponents+API.swift in Sources */,
 				1A5E92EA25379A85007B00DA /* UICollectionView+Extension.swift in Sources */,
 				1A5E93342538B2BC007B00DA /* HTTPMethod.swift in Sources */,
+				1A9D60E8253B7185001C4287 /* PaymentResponse.swift in Sources */,
 				1A7E786825378F7D000689D8 /* AppDelegate.swift in Sources */,
+				1A9D60E3253B5E81001C4287 /* PaymentRequest.swift in Sources */,
 				1A5E92F125379B7F007B00DA /* ProductCell.swift in Sources */,
 				1AC00BD32538D91B00F69B94 /* UITableView+Extension.swift in Sources */,
 				1A5E92DB253799BE007B00DA /* MainView.swift in Sources */,
