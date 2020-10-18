@@ -19,25 +19,33 @@ class CardViewController: UIViewController {
     cardView.setTotalPrice(totalPrice: cardViewModel.getTotalPrice())
   }
   @IBAction func paymentTapped(_ sender: Any) {
-    cardViewModel.payment()
+    cardViewModel.payment { response in
+      self.createDefaultAlert(title: "", message: (response.message ?? response.message) ?? "", okCallBack: {
+        if response.message != nil {
+          self.cardViewModel.clearCard()
+          self.cardView.tableView.reloadData()
+          self.dismiss(animated: true, completion: nil)
+        }
+      })
+    }
   }
 }
 
 extension CardViewController {
   func customizeNavigation() {
-    navigationItem.title = "Sepet"
-    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Kapat",
+    navigationItem.title = Constant.Title.cardTitle
+    navigationItem.rightBarButtonItem = UIBarButtonItem(title: Constant.ButtonText.close,
                                                         style: .plain,
                                                         target: self,
                                                         action: #selector(didCloseCard))
-    navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Sil",
+    navigationItem.leftBarButtonItem = UIBarButtonItem(title: Constant.ButtonText.delete,
                                                        style: .plain, target: self,
                                                        action: #selector(didDeleteCard))
   }
   
   @objc func didDeleteCard() {
-    createDefaultAlert(title: "Warning",
-                       message: "Sepetinizdeki ürünleri silmek istediğinize eminmisiniz ?",
+    createDefaultAlert(title: Constant.Title.warning,
+                       message: Constant.Message.deletingWarningMessage,
                        okCallBack: {
                         self.dismiss(animated: true, completion: {
                           self.delegate?.didDeleteCard()

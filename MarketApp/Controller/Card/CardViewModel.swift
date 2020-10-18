@@ -7,18 +7,17 @@ class CardViewModel {
   private var paymentProduct: [PaymentProduct] = []
   
   init(selectedProducts: [Product]) {
-    self.selectedProducts = selectedProducts.filter { $0.selectedCount != nil }
+    self.selectedProducts = selectedProducts.filter { $0.selectedCount != 0 }
     self.selectedProducts.forEach { product in
       paymentProduct.append(PaymentProduct(id: product.id, amount: product.selectedCount))
     }
   }
   
-  func payment() {
-    let body = Payment(products: paymentProduct)
-    API.shared.payment(body: body) { (result) in
+  func payment(completion: @escaping (PaymentResponse)->()) {
+    API.shared.payment(body: Payment(products: paymentProduct)) { (result) in
       switch result {
       case .success(let response):
-        print(response)
+        completion(response)
       case .failure(let error):
         print(error)
       }
@@ -56,5 +55,9 @@ class CardViewModel {
   
   func isCardEmpty() -> Bool {
     return selectedProducts.count == 0
+  }
+  
+  func clearCard() {
+    selectedProducts.removeAll()
   }
 }

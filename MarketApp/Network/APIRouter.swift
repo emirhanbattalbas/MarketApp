@@ -35,12 +35,18 @@ extension APIRouter: Routable {
     case .product:
       return nil
     case let .payment(payment):
-      return .parameters(payment.dictionary!)
+      return .parameters(payment.convertToJson!)
     }
   }
   
   var headers: Headers? {
-    return nil
+    switch self {
+    case .product:
+      return nil
+    case .payment:
+      let header : [String:String] = ["Content-Type":"application/json"]
+      return header
+    }
   }
   
   var parametersEncoding: ParametersEncoding {
