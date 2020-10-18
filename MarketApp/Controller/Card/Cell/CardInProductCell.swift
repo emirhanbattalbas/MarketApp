@@ -2,7 +2,6 @@ import UIKit
 
 protocol CardInProductCellDelegate: AnyObject {
   func didRemoveProduct(sender: UITableViewCell)
-  func didUpdateProduct(product: Product)
 }
 
 class CardInProductCell: UITableViewCell, Reusable {
@@ -20,6 +19,7 @@ class CardInProductCell: UITableViewCell, Reusable {
   @IBOutlet var productNameLabel: UILabel!
   
   weak var delegate: CardInProductCellDelegate?
+  weak var cardDelegate: CardUpdate?
   
   var product: Product? {
     didSet {
@@ -65,6 +65,6 @@ class CardInProductCell: UITableViewCell, Reusable {
     guard let product = product else { return }
     productPriceLabel.text = String((product.price)*Double(product.selectedCount ?? 1))
     productCountLabel.text = String(product.selectedCount ?? 0)
-    delegate?.didUpdateProduct(product: product)
+    cardDelegate?.updateCard(product: product)
   }
 }

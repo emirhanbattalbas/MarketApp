@@ -39,6 +39,7 @@
 		1A9D60E3253B5E81001C4287 /* PaymentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9D60E2253B5E81001C4287 /* PaymentRequest.swift */; };
 		1A9D60E8253B7185001C4287 /* PaymentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9D60E7253B7185001C4287 /* PaymentResponse.swift */; };
 		1A9D60ED253C2F5A001C4287 /* Encodable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9D60EC253C2F5A001C4287 /* Encodable+Extension.swift */; };
+		1A9D60F2253C6973001C4287 /* CardUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9D60F1253C6973001C4287 /* CardUpdate.swift */; };
 		1AC00BB62538D34500F69B94 /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC00BB42538D34500F69B94 /* CardViewController.swift */; };
 		1AC00BB72538D34500F69B94 /* CardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AC00BB52538D34500F69B94 /* CardViewController.xib */; };
 		1AC00BC52538D6E000F69B94 /* CardInProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC00BC32538D6E000F69B94 /* CardInProductCell.swift */; };
@@ -103,6 +104,7 @@
 		1A9D60E2253B5E81001C4287 /* PaymentRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRequest.swift; sourceTree = "<group>"; };
 		1A9D60E7253B7185001C4287 /* PaymentResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentResponse.swift; sourceTree = "<group>"; };
 		1A9D60EC253C2F5A001C4287 /* Encodable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Extension.swift"; sourceTree = "<group>"; };
+		1A9D60F1253C6973001C4287 /* CardUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardUpdate.swift; sourceTree = "<group>"; };
 		1AC00BB42538D34500F69B94 /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
 		1AC00BB52538D34500F69B94 /* CardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardViewController.xib; sourceTree = "<group>"; };
 		1AC00BC32538D6E000F69B94 /* CardInProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInProductCell.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				1A5E92E125379A69007B00DA /* Reusable.swift */,
+				1A9D60F1253C6973001C4287 /* CardUpdate.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -544,6 +547,7 @@
 				1A5E92DB253799BE007B00DA /* MainView.swift in Sources */,
 				1A9D60ED253C2F5A001C4287 /* Encodable+Extension.swift in Sources */,
 				1A28F1D42538B53D003D64A4 /* MainViewModel.swift in Sources */,
+				1A9D60F2253C6973001C4287 /* CardUpdate.swift in Sources */,
 				1A7E78B025379595000689D8 /* MainViewController.swift in Sources */,
 				1A5E932F2538B2BC007B00DA /* Routable.swift in Sources */,
 				1A5E93362538B2BC007B00DA /* Task.swift in Sources */,

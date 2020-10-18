@@ -61,36 +61,26 @@ extension MainViewController {
     let cardViewController = CardViewController()
     cardViewController.cardViewModel = CardViewModel(selectedProducts: viewModel.getProductList())
     cardViewController.delegate = self
+    cardViewController.updateCardDelegate = self
     let nav = UINavigationController(rootViewController: cardViewController)
     nav.modalPresentationStyle = .fullScreen
     present(nav, animated: true, completion: nil)
   }
 }
 
-extension MainViewController: ProductCellDelegate {
-  
-  func didProductIncrease(product: Product) {
-    viewModel.editProduct(newProduct: product)
-    setRightBarButton(totalProductCount: viewModel.cardBadgeCount())
-  }
-  
-  func didProductDecrease(product: Product) {
-    viewModel.editProduct(newProduct: product)
-    setRightBarButton(totalProductCount: viewModel.cardBadgeCount())
-  }
-}
-
 extension MainViewController: CardViewControllerDelegate {
-  
-  func didUpdateCard(product: Product) {
-    viewModel.editProduct(newProduct: product)
+  func reloadView() {
     mainView.collectionView.reloadData()
-    setRightBarButton(totalProductCount: viewModel.cardBadgeCount())
   }
   
   func didDeleteCard() {
     viewModel.removeAllSelectedProduct()
-    mainView.collectionView.reloadData()
-    setRightBarButton(totalProductCount: viewModel.cardBadgeCount())
+    setRightBarButton(totalProductCount: viewModel.getCardBadgeCount())
+  }
+}
+
+extension MainViewController: CardUpdate {
+  func updateCard(product: Product) {
+    setRightBarButton(totalProductCount: viewModel.getCardBadgeCount())
   }
 }

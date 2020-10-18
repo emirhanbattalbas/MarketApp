@@ -2,15 +2,15 @@ import UIKit
 
 protocol CardViewControllerDelegate: AnyObject {
   func didDeleteCard()
-  func didUpdateCard(product: Product)
+  func reloadView()
 }
 
 class CardViewController: UIViewController {
   
   @IBOutlet var cardView: CardView!
-    
   var cardViewModel: CardViewModel!
   weak var delegate: CardViewControllerDelegate?
+  weak var updateCardDelegate: CardUpdate?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -18,13 +18,17 @@ class CardViewController: UIViewController {
     customizeNavigation()
     cardView.setTotalPrice(totalPrice: cardViewModel.getTotalPrice())
   }
+  
   @IBAction func paymentTapped(_ sender: Any) {
     cardViewModel.payment { response in
       self.createDefaultAlert(title: "", message: (response.message ?? response.message) ?? "", okCallBack: {
         if response.message != nil {
           self.cardViewModel.clearCard()
           self.cardView.tableView.reloadData()
-          self.dismiss(animated: true, completion: nil)
+          self.dismiss(animated: true, completion: {
+            self.delegate?.didDeleteCard()
+            self.delegate?.reloadView()
+          })
         }
       })
     }
@@ -39,16 +43,18 @@ extension CardViewController {
                                                         target: self,
                                                         action: #selector(didCloseCard))
     navigationItem.leftBarButtonItem = UIBarButtonItem(title: Constant.ButtonText.delete,
-                                                       style: .plain, target: self,
-                                                       action: #selector(didDeleteCard))
+                                                       style: .plain,
+                                                       target: self,
+                                                       action: #selector(didClearCard))
   }
   
-  @objc func didDeleteCard() {
+  @objc func didClearCard() {
     createDefaultAlert(title: Constant.Title.warning,
                        message: Constant.Message.deletingWarningMessage,
                        okCallBack: {
                         self.dismiss(animated: true, completion: {
                           self.delegate?.didDeleteCard()
+                          self.delegate?.reloadView()
                         })
                        }, cancelCallBack: {})
   }
@@ -56,7 +62,8 @@ extension CardViewController {
   @objc func didCloseCard() {
     dismiss(animated: true, completion: {
       if let editingProduct = self.cardViewModel.getEditingProduct() {
-        self.delegate?.didUpdateCard(product: editingProduct)
+        self.updateCardDelegate?.updateCard(product: editingProduct)
+        self.delegate?.reloadView()
       }
     })
   }
@@ -73,18 +80,13 @@ extension CardViewController: UITableViewDelegate, UITableViewDataSource {
     let cell: CardInProductCell = tableView.dequeueReusableCell(for: indexPath)
     cell.product = cardViewModel.getProduct(row: indexPath.row)
     cell.delegate = self
+    cell.cardDelegate = self
     return cell
   }
 
 }
 
 extension CardViewController: CardInProductCellDelegate {
-  
-  func didUpdateProduct(product: Product) {
-    cardViewModel.setEditingProdut(product: product)
-    cardView.setTotalPrice(totalPrice: cardViewModel.getTotalPrice())
-  }
-  
   func didRemoveProduct(sender: UITableViewCell) {
     
     guard let indexPath = cardView.tableView.indexPath(for: sender) else { return }
@@ -93,7 +95,15 @@ extension CardViewController: CardInProductCellDelegate {
     
     if cardViewModel.isCardEmpty() {
       delegate?.didDeleteCard()
+      delegate?.reloadView()
       dismiss(animated: true, completion: nil)
     }
+  }
+}
+
+extension CardViewController: CardUpdate {
+  func updateCard(product: Product) {
+    cardViewModel.setEditingProdut(product: product)
+    cardView.setTotalPrice(totalPrice: cardViewModel.getTotalPrice())
   }
 }

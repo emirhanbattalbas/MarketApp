@@ -28,22 +28,22 @@
                     </connections>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NFO-e8-G4g">
-                    <rect key="frame" x="0.0" y="782" width="414" height="80"/>
+                    <rect key="frame" x="0.0" y="782" width="414" height="114"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toplam:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9d6-or-OR5">
-                            <rect key="frame" x="30" y="29.5" width="63.5" height="21.5"/>
+                            <rect key="frame" x="30" y="46.5" width="63.5" height="21.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="₺15,00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Na-03-GgF">
-                            <rect key="frame" x="103.5" y="25" width="84" height="30"/>
+                            <rect key="frame" x="103.5" y="42" width="84" height="30"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="add-SX-S8N">
-                            <rect key="frame" x="274" y="20" width="120" height="40"/>
+                            <rect key="frame" x="274" y="37" width="120" height="40"/>
                             <color key="backgroundColor" red="0.0089643765239999992" green="0.56568139790000005" blue="0.99260038139999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="120" id="qr8-H8-f2H"/>
@@ -73,7 +73,7 @@
             <constraints>
                 <constraint firstItem="NFO-e8-G4g" firstAttribute="top" secondItem="gNt-PA-FNJ" secondAttribute="bottom" id="84E-KP-BYg"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="NFO-e8-G4g" secondAttribute="trailing" id="FbL-eu-0Jg"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="NFO-e8-G4g" secondAttribute="bottom" id="HiD-nq-mIg"/>
+                <constraint firstAttribute="bottom" secondItem="NFO-e8-G4g" secondAttribute="bottom" id="HiD-nq-mIg"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="gNt-PA-FNJ" secondAttribute="trailing" id="OKK-TN-Tb0"/>
                 <constraint firstItem="NFO-e8-G4g" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="d91-Gd-rlJ"/>
                 <constraint firstItem="gNt-PA-FNJ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="mt1-e7-ta6"/>

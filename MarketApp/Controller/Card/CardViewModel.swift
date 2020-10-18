@@ -4,17 +4,17 @@ import UIKit
 class CardViewModel {
   private var selectedProducts: [Product]
   private var editingProduct: Product?
-  private var paymentProduct: [PaymentProduct] = []
+  private var paymentProducts: [PaymentProduct] = []
   
   init(selectedProducts: [Product]) {
     self.selectedProducts = selectedProducts.filter { $0.selectedCount != 0 }
     self.selectedProducts.forEach { product in
-      paymentProduct.append(PaymentProduct(id: product.id, amount: product.selectedCount))
+      paymentProducts.append(PaymentProduct(id: product.id, amount: product.selectedCount))
     }
   }
   
   func payment(completion: @escaping (PaymentResponse)->()) {
-    API.shared.payment(body: Payment(products: paymentProduct)) { (result) in
+    API.shared.payment(body: Payment(products: paymentProducts)) { (result) in
       switch result {
       case .success(let response):
         completion(response)
@@ -39,9 +39,10 @@ class CardViewModel {
   }
   
   func setEditingProdut(product: Product) {
-    paymentProduct = paymentProduct.filter { $0.id != product.id }
-    paymentProduct.append(PaymentProduct(id: product.id,
-                                         amount: product.selectedCount))
+    let index = paymentProducts.firstIndex { $0.id == product.id }
+    if let index = index {
+      paymentProducts[index].amount = product.selectedCount
+    }
     editingProduct = product
   }
   

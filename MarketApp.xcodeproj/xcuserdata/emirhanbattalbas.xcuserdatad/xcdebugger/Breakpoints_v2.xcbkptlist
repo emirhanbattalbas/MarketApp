@@ -3,4 +3,54 @@
    uuid = "85514F57-569C-493F-8935-9F829469198F"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "ACD120D1-F952-47FA-8193-F01B46640F03"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MarketApp/Controller/Card/CardViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "payment(completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "ACD120D1-F952-47FA-8193-F01B46640F03 - bb4c34ac89c36cf"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MarketApp.CardViewModel.payment(completion: (MarketApp.PaymentResponse) -&gt; ()) -&gt; ()"
+                  moduleName = "MarketApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/emirhanbattalbas/Desktop/MarketApp/MarketApp/Controller/Card/CardViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  uuid = "ACD120D1-F952-47FA-8193-F01B46640F03 - 4d5f4aab37be1876"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (MarketApp.APIResponse&lt;MarketApp.PaymentResponse&gt;) -&gt; () in MarketApp.CardViewModel.payment(completion: (MarketApp.PaymentResponse) -&gt; ()) -&gt; ()"
+                  moduleName = "MarketApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/emirhanbattalbas/Desktop/MarketApp/MarketApp/Controller/Card/CardViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "129">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

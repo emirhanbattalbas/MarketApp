@@ -1,9 +1,5 @@
 import UIKit
 
-protocol ProductCellDelegate: AnyObject {
-  func didProductIncrease(product: Product)
-  func didProductDecrease(product: Product)
-}
 
 class ProductCell: UICollectionViewCell, Reusable {
   
@@ -25,7 +21,8 @@ class ProductCell: UICollectionViewCell, Reusable {
   @IBOutlet var productPriceLabel: UILabel!
   @IBOutlet var productNameLabel: UILabel!
     
-  weak var delegate: ProductCellDelegate?
+  weak var delegate: CardUpdate?
+  
   var product: Product? {
     didSet {
       guard let product = product else { return }
@@ -54,25 +51,26 @@ class ProductCell: UICollectionViewCell, Reusable {
   
   @IBAction func decreaseTapped(_ sender: Any) {
     guard let product = product else { return }
-    
     product.selectedCount! -= 1
-    delegate?.didProductDecrease(product: product)
-    productCountLabel.text = String(product.selectedCount!)
-
-    guard product.selectedCount! != 0 else {
-      productCountView.isHidden = true
-      decreaseButton.isHidden = true
-      return
-    }
+    delegate?.updateCard(product: product)
+    setLabels(product: product)
   }
   
   @IBAction func increaseTapped(_ sender: Any) {
     guard let product = product, product.stock > product.selectedCount! else { return }
-    
     product.selectedCount! += 1
+    delegate?.updateCard(product: product)
+    setLabels(product: product)
+  }
+  
+  private func setLabels(product: Product) {
     productCountLabel.text = String(product.selectedCount!)
-    productCountView.isHidden = false
-    decreaseButton.isHidden = false
-    delegate?.didProductIncrease(product: product)
+    if product.selectedCount == 0 {
+      productCountView.isHidden = true
+      decreaseButton.isHidden = true
+    } else {
+      productCountView.isHidden = false
+      decreaseButton.isHidden = false
+    }
   }
 }

@@ -10,10 +10,10 @@ class MainViewModel {
       guard let self = self else { return }
       switch result {
       case let .success(products):
-        self.products = products
-        for i in 0..<self.products.count {
-          self.products[i].selectedCount = 0
+        products.forEach { product in
+          product.selectedCount = 0
         }
+        self.products = products
         view.collectionView.reloadData()
       case let .failure(error):
         print(error)
@@ -39,15 +39,7 @@ class MainViewModel {
     }
   }
   
-  func editProduct(newProduct: Product) {
-    for i in 0..<products.count {
-      if products[i].id == newProduct.id {
-        products[i] = newProduct
-      }
-    }
-  }
-  
-  func cardBadgeCount() -> Int {
+  func getCardBadgeCount() -> Int {
     return products.map { ($0.selectedCount ?? 0) }.reduce(0, +)
   }
 }
