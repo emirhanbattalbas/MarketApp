@@ -29,7 +29,7 @@ class ProductCell: UICollectionViewCell, Reusable {
       
       if let urlString = product.imageUrl,
          let url = URL(string: urlString) {
-        productImageView.load(url: url)
+        productImageView.loadImageFromURL(URL: url)
       }
       productPriceLabel.text = product.amount
       productNameLabel.text = product.name

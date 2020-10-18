@@ -27,7 +27,7 @@ class CardInProductCell: UITableViewCell, Reusable {
       
       if let urlString = product.imageUrl,
          let url = URL(string: urlString) {
-        productImageView.load(url: url)
+        productImageView.loadImageFromURL(URL: url)
       }
       productPriceLabel.text = String((product.price)*Double(product.selectedCount ?? 1))
       productNameLabel.text = product.name
