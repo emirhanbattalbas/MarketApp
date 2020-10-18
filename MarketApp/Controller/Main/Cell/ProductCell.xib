@@ -34,7 +34,7 @@
                                         </constraints>
                                         <state key="normal" image="minus" catalog="system"/>
                                         <connections>
-                                            <action selector="deIncreaseTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="E0B-0q-xpe"/>
+                                            <action selector="decreaseTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="1lG-qp-g9W"/>
                                         </connections>
                                     </button>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6lc-1s-CT7">
@@ -111,7 +111,7 @@
             </constraints>
             <size key="customSize" width="115" height="158"/>
             <connections>
-                <outlet property="deIncreaseButton" destination="DKF-6V-FWl" id="xJS-F9-p4L"/>
+                <outlet property="decreaseButton" destination="DKF-6V-FWl" id="9GQ-c9-fKF"/>
                 <outlet property="productCountLabel" destination="Ic2-VN-ljI" id="WNw-if-DLh"/>
                 <outlet property="productCountView" destination="6lc-1s-CT7" id="BrW-eY-str"/>
                 <outlet property="productImageView" destination="bIl-K4-JaA" id="7iC-hi-hqe"/>

@@ -74,7 +74,7 @@ extension MainViewController: ProductCellDelegate {
     setRightBarButton(totalProductCount: viewModel.cardBadgeCount())
   }
   
-  func didProductDeIncrease(product: Product) {
+  func didProductDecrease(product: Product) {
     viewModel.editProduct(newProduct: product)
     setRightBarButton(totalProductCount: viewModel.cardBadgeCount())
   }

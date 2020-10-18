@@ -11,6 +11,9 @@ class MainViewModel {
       switch result {
       case let .success(products):
         self.products = products
+        for i in 0..<self.products.count {
+          self.products[i].selectedCount = 0
+        }
         view.collectionView.reloadData()
       case let .failure(error):
         print(error)
@@ -32,7 +35,7 @@ class MainViewModel {
   
   func removeAllSelectedProduct() {
     products.forEach { product in
-      product.selectedCount = nil
+      product.selectedCount = 0
     }
   }
   

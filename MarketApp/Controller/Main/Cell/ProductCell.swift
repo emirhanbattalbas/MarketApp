@@ -2,7 +2,7 @@ import UIKit
 
 protocol ProductCellDelegate: AnyObject {
   func didProductIncrease(product: Product)
-  func didProductDeIncrease(product: Product)
+  func didProductDecrease(product: Product)
 }
 
 class ProductCell: UICollectionViewCell, Reusable {
@@ -12,7 +12,7 @@ class ProductCell: UICollectionViewCell, Reusable {
   }
   
   // MARK:- Button
-  @IBOutlet var deIncreaseButton: UIButton!
+  @IBOutlet var decreaseButton: UIButton!
   
   //MARK:- View
   @IBOutlet var productCountView: UIView!
@@ -24,9 +24,7 @@ class ProductCell: UICollectionViewCell, Reusable {
   @IBOutlet var productCountLabel: UILabel!
   @IBOutlet var productPriceLabel: UILabel!
   @IBOutlet var productNameLabel: UILabel!
-  
-  private(set) var productCount: Int = 0
-  
+    
   weak var delegate: ProductCellDelegate?
   var product: Product? {
     didSet {
@@ -39,13 +37,13 @@ class ProductCell: UICollectionViewCell, Reusable {
       productPriceLabel.text = product.amount
       productNameLabel.text = product.name
       
-      if let selectedCount = product.selectedCount {
-        productCountLabel.text = String(selectedCount)
-        deIncreaseButton.isHidden = false
-        productCountView.isHidden = false
-      } else {
-        deIncreaseButton.isHidden = true
+      if product.selectedCount == 0 {
+        decreaseButton.isHidden = true
         productCountView.isHidden = true
+      } else {
+        productCountLabel.text = String(product.selectedCount ?? 0)
+        decreaseButton.isHidden = false
+        productCountView.isHidden = false
       }
     }
   }
@@ -54,29 +52,27 @@ class ProductCell: UICollectionViewCell, Reusable {
     super.awakeFromNib()
   }
   
-  @IBAction func deIncreaseTapped(_ sender: Any) {
-
+  @IBAction func decreaseTapped(_ sender: Any) {
     guard let product = product else { return }
-    productCount -= 1
-    product.selectedCount = productCount
-    delegate?.didProductDeIncrease(product: product)
     
-    guard productCount != 0 else {
+    product.selectedCount! -= 1
+    delegate?.didProductDecrease(product: product)
+    productCountLabel.text = String(product.selectedCount!)
+
+    guard product.selectedCount! != 0 else {
       productCountView.isHidden = true
-      deIncreaseButton.isHidden = true
+      decreaseButton.isHidden = true
       return
     }
-    productCountLabel.text = String(productCount)
   }
   
   @IBAction func increaseTapped(_ sender: Any) {
+    guard let product = product, product.stock > product.selectedCount! else { return }
     
-    guard let product = product, product.stock > productCount else { return }
-    productCount += 1
-    product.selectedCount = productCount
-    productCountLabel.text = String(productCount)
+    product.selectedCount! += 1
+    productCountLabel.text = String(product.selectedCount!)
     productCountView.isHidden = false
-    deIncreaseButton.isHidden = false
+    decreaseButton.isHidden = false
     delegate?.didProductIncrease(product: product)
   }
 }

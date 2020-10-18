@@ -30,8 +30,10 @@ class CardInProductCell: UITableViewCell, Reusable {
         productImageView.load(url: url)
       }
       productPriceLabel.text = String((product.price)*Double(product.selectedCount ?? 1))
-      productCountLabel.text = String(product.selectedCount ?? 0)
       productNameLabel.text = product.name
+      if let selectedCount = product.selectedCount {
+        productCountLabel.text = String(selectedCount)
+      }
     }
   }
   
@@ -44,22 +46,19 @@ class CardInProductCell: UITableViewCell, Reusable {
   }
   
   @IBAction func decreaseTapped(_ sender: Any) {
-    
     product?.selectedCount! -= 1
     setLabels(product: product)
-    if product?.selectedCount == 0 {
-      product?.selectedCount = nil
-    }
-    guard product?.selectedCount != nil else {
+    guard product?.selectedCount != 0 else {
       delegate?.didRemoveProduct(sender: self)
       return
     }
   }
   
   @IBAction func increaseTapped(_ sender: Any) {
-    guard product!.stock >= (product?.selectedCount ?? 0) else { return }
-    product?.selectedCount! += 1
-    setLabels(product: product)
+    if let selectedCount = product?.selectedCount, product!.stock > selectedCount  {
+      product?.selectedCount! += 1
+      setLabels(product: product)
+    }
   }
   
   private func setLabels(product: Product?) {
